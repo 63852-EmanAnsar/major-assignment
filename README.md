@@ -49,14 +49,14 @@ No extra installation is needed.
 - **Pomodoro Timer:** Click **Start** to begin a 25-minute study session. Use **Pause** to stop for a moment and **Reset** to start over. A 5-minute break follows each session.
 - **Daily Study Checklist:** Type a task and add it to the list. Mark it as complete when you finish it, or delete it if you no longer need it. The checklist shows how many tasks you've completed.
 - **Daily Motivational Quote:** A quote is shown on the page. Click the button to change it.
-- **Subject-wise Progress Tracker:** Add a subject and set a study goal for it. The progress bar shows how much of the goal you've completed.
+-**Study Notes Manager:** Allows students to create, organize, view, edit, delete, and search their study notes. Students can organize notes by subjects.
 
 ## Team Members and Roles
 
 | Member | Name | Responsibilities |
 |--------|------|------------------|
 | Member 1 | Eman Ansar | Smart Studey Checkliat and Manager. |
-| Member 2 | Mahnoor Ahmer | Design and styling |
+| Member 2 | Mahnoor Ahmer | Study Notes Manager |
 | Member 3 | [Name] | [Responsibilities] |
 
 ## GitHub Collaboration
