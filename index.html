@@ -141,15 +141,48 @@
     </div>
   </section>
 
-  <!-- 4. CHECKLIST (Heading removed) -->
+    <!-- 4. CHECKLIST -->
   <section class="view" id="view-tasks">
+
+    <!-- Daily Progress -->
     <div class="card">
+      <h4>Today's Progress</h4>
+      <div class="tp-stats">
+        <div class="tp-box"><strong id="tpTotal">0</strong><span>Total Tasks</span></div>
+        <div class="tp-box"><strong id="tpCompleted">0</strong><span>Completed</span></div>
+        <div class="tp-box"><strong id="tpPending">0</strong><span>Pending</span></div>
+        <div class="tp-box"><strong id="tpPercent">0%</strong><span>Completion</span></div>
+      </div>
+      <div class="tp-bar"><div class="tp-fill" id="tpFill"></div></div>
+    </div>
+
+    <!-- Add / Edit Task -->
+    <div class="card">
+      <h4 id="taskFormTitle">Add a New Task</h4>
       <form class="task-form" id="taskForm">
         <input id="taskTitle" type="text" placeholder="What to study?" required />
-        <input id="taskSubject" type="text" placeholder="Subject" />
-        <select id="taskPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
-        <button class="btn-add" type="submit">Add Task</button>
+        <input id="taskSubject" type="text" placeholder="Subject" required />
+        <input id="taskDate" type="date" required />
+        <select id="taskPriority">
+          <option value="high">High</option>
+          <option value="medium" selected>Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <div class="task-form-actions">
+          <button class="btn-add" type="submit" id="taskSubmitBtn">Add Task</button>
+          <button class="btn-cancel" type="button" id="taskCancelBtn" onclick="cancelEdit()" hidden>Cancel</button>
+        </div>
       </form>
+      <p class="task-msg" id="taskMsg"></p>
+    </div>
+
+    <!-- Filters + Task List -->
+    <div class="card">
+      <div class="task-filters">
+        <button class="filter-btn active" onclick="setFilter('all', this)">All Tasks</button>
+        <button class="filter-btn" onclick="setFilter('pending', this)">Pending</button>
+        <button class="filter-btn" onclick="setFilter('completed', this)">Completed</button>
+      </div>
       <div class="task-list" id="taskList"></div>
     </div>
   </section>
@@ -264,46 +297,7 @@ function getNewQuote() {
 getNewQuote(); // Load one on start
 
 // ================= CHECKLIST (Tasks) =================
-document.getElementById('taskForm').onsubmit = (e) => {
-  e.preventDefault();
-  const tasks = getTasks();
-  tasks.push({
-    id: Date.now(),
-    title: document.getElementById('taskTitle').value,
-    subject: document.getElementById('taskSubject').value || 'General',
-    priority: document.getElementById('taskPriority').value,
-    done: false
-  });
-  saveTasks(tasks);
-  document.getElementById('taskForm').reset();
-  renderTasks(); updateStats();
-};
-
-function renderTasks() {
-  const list = document.getElementById('taskList');
-  const tasks = getTasks();
-  if (!tasks.length) return list.innerHTML = '<div class="empty">No tasks yet. Add one above!</div>';
-  
-  list.innerHTML = tasks.map(t => `
-    <div class="task-item ${t.done ? 'done' : ''}">
-      <div class="t-check" onclick="toggleTask(${t.id})" style="cursor:pointer; ${t.done ? 'background:#10b981' : 'background:#fff'}">
-        ${t.done ? '<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>' : ''}
-      </div>
-      <div class="t-body"><div class="t-title">${t.title}</div><div class="t-meta">${t.subject}</div></div>
-      <span class="badge ${t.priority}">${t.priority}</span>
-      <button class="t-del" onclick="deleteTask(${t.id})">✕</button>
-    </div>`).join('');
-}
-
-window.toggleTask = (id) => {
-  let tasks = getTasks();
-  tasks = tasks.map(t => t.id === id ? {...t, done: !t.done} : t);
-  saveTasks(tasks); renderTasks(); updateStats();
-};
-window.deleteTask = (id) => {
-  if(!confirm('Delete this task?')) return;
-  saveTasks(getTasks().filter(t => t.id !== id)); renderTasks(); updateStats();
-};
+// Checklist code is in tasks.js
 
 // ================= NOTES =================
 document.getElementById('noteForm').onsubmit = (e) => {
@@ -378,7 +372,8 @@ document.querySelectorAll('.pomo-mode').forEach(btn => {
 });
 
 // Initialize
-paintPomo(); renderTasks(); renderNotes(); updateStats();
+paintPomo(); renderNotes(); updateStats();
 </script>
+<script src="tasks.js"></script>
 </body>
 </html>
