@@ -154,17 +154,29 @@
     </div>
   </section>
 
-  <!-- 5. NOTES (Heading removed) -->
+    <!-- 5. NOTES (Heading removed) -->
   <section class="view" id="view-notes">
     <div class="card">
-      <form class="notes-form" id="noteForm">
-        <input id="noteTitle" type="text" placeholder="Title" required />
-        <input id="noteSubject" type="text" placeholder="Subject" />
+      <form class="notes-form" id="noteForm" novalidate>
+        <input id="noteTitle" type="text" placeholder="Title" maxlength="100" />
+        <input id="noteSubject" type="text" placeholder="Subject (e.g. Physics)" list="noteSubjectList" maxlength="40" />
+        <datalist id="noteSubjectList"></datalist>
         <textarea id="noteContent" placeholder="Write note..."></textarea>
-        <div class="actions"><button class="btn-add" type="submit">Save Note</button></div>
+        <p class="notes-msg" id="noteMsg"></p>
+        <div class="actions">
+          <button class="btn-cancel" type="button" id="noteCancel" hidden>Cancel</button>
+          <button class="btn-add" type="submit" id="noteSubmit">Save Note</button>
+        </div>
       </form>
     </div>
-    <div class="card"><div class="notes-grid" id="notesGrid"></div></div>
+    <div class="card">
+      <div class="notes-toolbar">
+        <input id="noteSearch" type="search" placeholder="Search by title or keyword..." />
+        <select id="noteFilter"><option value="">All Subjects</option></select>
+      </div>
+      <p class="notes-count" id="notesCount"></p>
+      <div class="notes-grid" id="notesGrid"></div>
+    </div>
   </section>
 
   <!-- 6. PROFILE (Heading removed) -->
@@ -193,7 +205,7 @@
   </section>
 
 </main>
-
+<script src="notes.js"></script>
 <script>
 // ================= DATABASE (LocalStorage) =================
 const user = JSON.parse(localStorage.getItem('currentUser'));
@@ -305,39 +317,6 @@ window.deleteTask = (id) => {
   saveTasks(getTasks().filter(t => t.id !== id)); renderTasks(); updateStats();
 };
 
-// ================= NOTES =================
-document.getElementById('noteForm').onsubmit = (e) => {
-  e.preventDefault();
-  const notes = getNotes();
-  notes.unshift({
-    id: Date.now(),
-    title: document.getElementById('noteTitle').value,
-    subject: document.getElementById('noteSubject').value || 'General',
-    content: document.getElementById('noteContent').value
-  });
-  saveNotes(notes);
-  document.getElementById('noteForm').reset();
-  renderNotes(); updateStats();
-};
-
-function renderNotes() {
-  const grid = document.getElementById('notesGrid');
-  const notes = getNotes();
-  if (!notes.length) return grid.innerHTML = '<div class="empty">No notes yet.</div>';
-  
-  grid.innerHTML = notes.map(n => `
-    <div class="note-card">
-      <div class="note-subject">${n.subject}</div>
-      <div class="note-title">${n.title}</div>
-      <div class="note-content">${n.content}</div>
-      <button class="t-del" style="margin-top:10px; width:100%" onclick="deleteNote(${n.id})">Delete</button>
-    </div>`).join('');
-}
-
-window.deleteNote = (id) => {
-  if(!confirm('Delete this note?')) return;
-  saveNotes(getNotes().filter(n => n.id !== id)); renderNotes(); updateStats();
-};
 
 // ================= TIMER (Pomodoro) =================
 let pTime = 25*60, pTotal = 25*60, pRun = false, pInt, pMode = 'focus';
