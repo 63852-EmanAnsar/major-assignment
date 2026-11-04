@@ -334,6 +334,20 @@
     </div>
   </section>
 
+<<<<<<< HEAD
+    <!-- 5. NOTES (Heading removed) -->
+  <section class="view" id="view-notes">
+    <div class="card">
+      <form class="notes-form" id="noteForm" novalidate>
+        <input id="noteTitle" type="text" placeholder="Title" maxlength="100" />
+        <input id="noteSubject" type="text" placeholder="Subject (e.g. Physics)" list="noteSubjectList" maxlength="40" />
+        <datalist id="noteSubjectList"></datalist>
+        <textarea id="noteContent" placeholder="Write note..."></textarea>
+        <p class="notes-msg" id="noteMsg"></p>
+        <div class="actions">
+          <button class="btn-cancel" type="button" id="noteCancel" hidden>Cancel</button>
+          <button class="btn-add" type="submit" id="noteSubmit">Save Note</button>
+=======
     <!-- 4. CHECKLIST -->
   <!-- 4. CHECKLIST (Tasks) -->
   <section class="view" id="view-tasks">
@@ -395,15 +409,27 @@
 
         <div class="actions">
           <button class="btn-add" type="submit">Save Note</button>
+>>>>>>> main
         </div>
       </form>
 
     </div>
+<<<<<<< HEAD
+    <div class="card">
+      <div class="notes-toolbar">
+        <input id="noteSearch" type="search" placeholder="Search by title or keyword..." />
+        <select id="noteFilter"><option value="">All Subjects</option></select>
+      </div>
+      <p class="notes-count" id="notesCount"></p>
+      <div class="notes-grid" id="notesGrid"></div>
+    </div>
+=======
 
     <div class="card">
       <div class="notes-grid" id="notesGrid"></div>
     </div>
 
+>>>>>>> main
   </section>
 
   <!-- 6. PROFILE -->
@@ -444,8 +470,12 @@
   </section>
 
 </main>
+<<<<<<< HEAD
+<script src="notes.js"></script>
+=======
 
 <!-- ================= MAIN APP LOGIC ================= -->
+>>>>>>> main
 <script>
 
 const user = JSON.parse(localStorage.getItem('currentUser'));
@@ -749,6 +779,8 @@ window.deleteTask = (id) => {
 
 };
 
+<<<<<<< HEAD
+=======
 // ================= NOTES MANAGEMENT =================
 
 document.getElementById('noteForm').onsubmit = (e) => {
@@ -813,6 +845,7 @@ window.deleteNote = (id) => {
   updateStats();
 
 };
+>>>>>>> main
 
 // ================= INITIALIZE APP DATA =================
 

@@ -282,6 +282,47 @@ svg { display: block; }
 .note-title { font-size: 15px; font-weight: 700; color: var(--text); }
 .note-content { font-size: 13px; color: var(--muted); white-space: pre-wrap; max-height: 120px; overflow: hidden; }
 
+/* --- Study Notes Manager --- */
+.notes-msg { grid-column: 1 / -1; font-size: 13px; font-weight: 550; color: var(--red); }
+.notes-msg:empty { display: none; }
+.notes-msg.ok { color: var(--green); }
+.notes-msg.info { color: var(--primary); }
+
+.btn-cancel {
+  padding: 11px 20px; border: 1px solid var(--border); border-radius: 10px;
+  background: #fff; color: var(--muted); font-weight: 700; font-size: 14px;
+  transition: color .15s, border-color .15s;
+}
+.btn-cancel:hover { color: var(--primary); border-color: #c7d2fe; }
+
+.notes-toolbar { display: grid; grid-template-columns: 1fr 220px; gap: 10px; margin-bottom: 12px; }
+.notes-toolbar input, .notes-toolbar select {
+  width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: 10px;
+  background: #fbfcff; color: var(--text); font-size: 14px;
+  transition: border-color .18s, box-shadow .18s;
+}
+.notes-toolbar input:focus, .notes-toolbar select:focus {
+  outline: 0; border-color: #a5b4fc; background: #fff; box-shadow: 0 0 0 4px rgba(99,102,241,.12);
+}
+.notes-count { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+.notes-count:empty { display: none; }
+
+.notes-grid .empty { grid-column: 1 / -1; }
+.note-title, .note-content { overflow-wrap: anywhere; }
+.note-content { flex: 1; }
+.note-date { font-size: 11.5px; color: #94a3b8; }
+.note-card.is-editing { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,.15); }
+
+.note-actions { display: flex; gap: 8px; margin-top: 4px; }
+.note-btn {
+  flex: 1; padding: 8px 10px; border: 1px solid var(--border); border-radius: 9px;
+  background: #fff; color: var(--muted); font-size: 13px; font-weight: 650;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.note-btn:hover { color: var(--primary); border-color: #c7d2fe; background: #f5f7ff; }
+.note-btn.danger:hover { color: var(--red); border-color: #fecaca; background: #fef2f2; }
+
+@media (max-width: 600px) { .notes-toolbar { grid-template-columns: 1fr; } }
 /* ============================================================
    9. PROFILE PAGE
 ============================================================ */
