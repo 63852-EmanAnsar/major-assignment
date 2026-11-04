@@ -197,9 +197,17 @@ svg { display: block; }
 /* ============================================================
    7. TASKS / CHECKLIST
 ============================================================ */
-.task-form { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 18px; }
-.task-form input, .task-form select { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: 10px; background: #fbfcff; font-size: 14px; }
-.task-form input:focus, .task-form select:focus { outline: 0; border-color: #a5b4fc; background: #fff; box-shadow: 0 0 0 4px rgba(99,102,241,.12); }
+.task-form {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px;
+}
+.task-form input, .task-form select {
+  width: 100%; padding: 11px 13px; border: 1px solid var(--border);
+  border-radius: 10px; background: #fbfcff; font-size: 14px;
+  transition: border-color .18s, box-shadow .18s;
+}
+.task-form input:focus, .task-form select:focus {
+  outline: 0; border-color: #a5b4fc; background: #fff; box-shadow: 0 0 0 4px rgba(99,102,241,.12);
+}
 
 .task-list { display: flex; flex-direction: column; gap: 10px; }
 .task-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: #fff; transition: all .18s; }
@@ -218,6 +226,46 @@ svg { display: block; }
 .badge.low { background: #ecfdf5; color: #059669; }
 .t-del { width: 32px; height: 32px; flex: none; border: 0; border-radius: 9px; background: transparent; color: var(--muted); display: grid; place-items: center; transition: all .15s; font-size: 16px; }
 .t-del:hover { background: #fef2f2; color: var(--red); }
+
+/* --- Checklist: form buttons & error message --- */
+.task-form-actions { display: flex; gap: 8px; }
+.task-form-actions .btn-add { white-space: nowrap; }
+.btn-cancel {
+  padding: 11px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: #fff; color: var(--muted); font-weight: 650; font-size: 14px;
+}
+.btn-cancel:hover { color: var(--primary); border-color: #c7d2fe; }
+.task-msg { min-height: 18px; margin-top: 8px; font-size: 13px; font-weight: 550; color: var(--red); }
+
+/* --- Checklist: daily progress --- */
+.tp-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tp-box { padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: #fbfcff; }
+.tp-box strong { display: block; font-size: 22px; font-weight: 800; letter-spacing: -.5px; line-height: 1.2; color: var(--primary); }
+.tp-box span { font-size: 12px; font-weight: 550; color: var(--muted); }
+.tp-bar { height: 12px; border-radius: 99px; background: #eef2ff; overflow: hidden; }
+.tp-fill { height: 100%; width: 0%; border-radius: 99px; background: var(--grad); transition: width .4s ease; }
+
+/* --- Checklist: filters --- */
+.task-filters {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 5px; margin-bottom: 16px;
+  background: #f1f5fd; border-radius: 12px; width: fit-content; max-width: 100%;
+}
+.filter-btn {
+  padding: 9px 18px; border: 0; border-radius: 9px; background: transparent;
+  font-size: 13px; font-weight: 650; color: var(--muted); transition: all .18s;
+}
+.filter-btn.active { background: #fff; color: var(--primary); box-shadow: 0 4px 12px -4px rgba(99,102,241,.4); }
+
+/* --- Checklist: task row --- */
+.t-checkbox { width: 20px; height: 20px; flex: none; accent-color: var(--primary); cursor: pointer; }
+.task-item.done .t-checkbox { accent-color: var(--green); }
+.t-actions { display: flex; gap: 4px; flex: none; }
+.t-edit {
+  width: 32px; height: 32px; flex: none; border: 0; border-radius: 9px;
+  background: transparent; color: var(--muted); display: grid; place-items: center;
+  transition: background .15s, color .15s; font-size: 16px;
+}
+.t-edit:hover { background: #eef2ff; color: var(--primary); }
 
 /* ============================================================
    8. NOTES
@@ -258,7 +306,8 @@ svg { display: block; }
   .main { padding: 100px 24px 60px; }
   .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .task-form { grid-template-columns: 1fr 1fr; }
-  .task-form .btn-add { grid-column: 1 / -1; }
+  .task-form-actions { grid-column: 1 / -1; }
+  .task-form-actions button { flex: 1; }
 }
 
 @media (max-width: 900px) {
@@ -283,6 +332,13 @@ svg { display: block; }
 @media (max-width: 520px) {
   .stats-grid { grid-template-columns: 1fr; }
   .task-form { grid-template-columns: 1fr; }
+    .tp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .task-filters { width: 100%; }
+  .filter-btn { flex: 1; padding: 9px 8px; }
+  .task-item { flex-wrap: wrap; }
+  .t-body { flex: 1 1 calc(100% - 40px); }
+  .task-item .badge { margin-left: 32px; }
+  .t-actions { margin-left: auto; }
   .profile-content { padding: 0 20px 20px; }
   .auth-body { padding: 20px 15px; }
   .auth-brand .brand-logo { width: 220px; height: 110px; border-radius: 16px; }
