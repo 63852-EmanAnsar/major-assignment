@@ -1,16 +1,6 @@
-# VS Code settings
+major-assignment/
+.claudio/
+db.php
+test.php
 .vscode/
-
-# OS files
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Logs
-*.log
-
-# Node modules (if you ever add npm packages)
 node_modules/
-
-# Environment files
-.env
