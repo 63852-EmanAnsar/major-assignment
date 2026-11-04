@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>StudyFlow — Smart Study Planner</title>
 <link rel="stylesheet" href="style.css" />
+
+<style>
+/* ================= DAILY MOTIVATIONAL QUOTE ================= */
+
+#daily-quote {
+  width: 100%;
+}
+
+#motivationQuote,
+#motivationAuthor {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.quote-fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.quote-fade-in {
+  animation: quoteFadeIn 0.4s ease;
+}
+
+@keyframes quoteFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#changeQuoteBtn {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#changeQuoteBtn:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+  #motivationQuote {
+    font-size: 19px !important;
+  }
+
+  #daily-quote {
+    padding: 35px 15px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #motivationQuote,
+  #motivationAuthor,
+  #changeQuoteBtn {
+    transition: none;
+    animation: none;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <!-- ================= SIDEBAR ================= -->
@@ -14,150 +77,260 @@
     <div class="brand-logo">
       <img src="assets/study.jpg" alt="StudyFlow Logo" />
     </div>
-    <div class="brand-text"><h1>StudyFlow</h1><span>Smart Planner</span></div>
+    <div class="brand-text">
+      <h1>StudyFlow</h1>
+      <span>Smart Planner</span>
+    </div>
   </div>
 
   <p class="nav-label">Main Menu</p>
+
   <nav class="nav">
+
     <!-- 1. Dashboard -->
     <button class="nav-item active" data-view="dashboard" data-title="Dashboard">
       <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/>
-          <rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="2"/>
+          <rect x="14" y="3" width="7" height="7" rx="2"/>
+          <rect x="3" y="14" width="7" height="7" rx="2"/>
+          <rect x="14" y="14" width="7" height="7" rx="2"/>
         </svg>
-      </span><span>Dashboard</span>
+      </span>
+      <span>Dashboard</span>
     </button>
 
     <!-- 2. Daily Motivation -->
-    <button class="nav-item" data-view="motivation" data-title="Daily Motivation">
+    <button class="nav-item" data-view="motivation" data-title="Daily Motivational Quote">
       <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
           <circle cx="12" cy="12" r="3"/>
         </svg>
-      </span><span>Motivation</span>
+      </span>
+      <span>Daily Quote</span>
     </button>
 
-    <!-- 3. Timer (Pomodoro) -->
+    <!-- 3. Timer -->
     <button class="nav-item" data-view="pomodoro" data-title="Study Timer">
       <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="13" r="8"/>
+          <path d="M12 9v4l2.5 2"/>
+          <path d="M9 2h6"/>
         </svg>
-      </span><span>Timer</span>
+      </span>
+      <span>Timer</span>
     </button>
 
     <!-- 4. Daily Study Checklist -->
     <button class="nav-item" data-view="tasks" data-title="Daily Study Checklist">
       <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 11l3 3L22 4"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
         </svg>
-      </span><span>Checklist</span>
+      </span>
+      <span>Checklist</span>
     </button>
 
     <!-- 5. Notes -->
     <button class="nav-item" data-view="notes" data-title="Notes">
       <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <path d="M14 2v6h6"/>
+          <path d="M8 13h8"/>
+          <path d="M8 17h5"/>
         </svg>
-      </span><span>Notes</span>
+      </span>
+      <span>Notes</span>
     </button>
 
     <!-- 6. Profile -->
     <button class="nav-item" data-view="profile" data-title="My Profile">
       <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5S20 17 20 21"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 21c0-4 3.6-6.5 8-6.5S20 17 20 21"/>
         </svg>
-      </span><span>Profile</span>
+      </span>
+      <span>Profile</span>
     </button>
+
   </nav>
 
-  <div class="sidebar-footer"><strong>Stay focused ✨</strong><span>Small steps, big results.</span></div>
+  <div class="sidebar-footer">
+    <strong>Stay focused ✨</strong>
+    <span>Small steps, big results.</span>
+  </div>
 </aside>
 
 <!-- ================= TOPBAR ================= -->
 <header class="topbar">
-  <div class="topbar-title"><span class="crumb">Smart Study Planner</span><h2 id="topbarTitle">Dashboard</h2></div>
+  <div class="topbar-title">
+    <span class="crumb">Smart Study Planner</span>
+    <h2 id="topbarTitle">Dashboard</h2>
+  </div>
 </header>
 
 <!-- ================= MAIN CONTENT ================= -->
 <main class="main">
-  
+
   <!-- 1. DASHBOARD -->
   <section class="view active" id="view-dashboard">
+
     <div style="margin-bottom: 22px;">
-      <h3 id="welcomeHead" style="font-size: 23px; font-weight: 750; letter-spacing: -.65px; color: var(--text);">Welcome back 👋</h3>
-      <p style="color: var(--muted); font-size: 14px; margin-top: 4px;">Here is a quick look at your study progress.</p>
+      <h3 id="welcomeHead" style="font-size: 23px; font-weight: 750; letter-spacing: -.65px; color: var(--text);">
+        Welcome back 👋
+      </h3>
+      <p style="color: var(--muted); font-size: 14px; margin-top: 4px;">
+        Here is a quick look at your study progress.
+      </p>
     </div>
-    
+
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-meta"><strong id="statTotalTasks">0</strong><span>Total Tasks</span></div></div>
-      <div class="stat-card"><div class="stat-meta"><strong id="statCompleted">0</strong><span>Completed</span></div></div>
-      <div class="stat-card"><div class="stat-meta"><strong id="statSessions">0</strong><span>Pomodoros Today</span></div></div>
-      <div class="stat-card"><div class="stat-meta"><strong id="statNotes">0</strong><span>Notes Saved</span></div></div>
+      <div class="stat-card">
+        <div class="stat-meta">
+          <strong id="statTotalTasks">0</strong>
+          <span>Total Tasks</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-meta">
+          <strong id="statCompleted">0</strong>
+          <span>Completed</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-meta">
+          <strong id="statSessions">0</strong>
+          <span>Pomodoros Today</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-meta">
+          <strong id="statNotes">0</strong>
+          <span>Notes Saved</span>
+        </div>
+      </div>
     </div>
-    
+
+    <!-- Dashboard Daily Quote -->
     <div class="card" style="margin-top:20px; text-align:center;">
-      <h4>Quote of the Day</h4>
+      <h4>Quote of the Day ✨</h4>
       <p id="dashQuote" style="font-size:16px; font-style:italic; color:var(--primary); margin-top:10px;"></p>
     </div>
+
   </section>
 
-  <!-- 2. MOTIVATION -->
+  <!-- 2. DAILY MOTIVATIONAL QUOTE -->
   <section class="view" id="view-motivation">
-    <div class="card" style="text-align:center; padding: 70px 20px;">
-      <div style="font-size: 40px; margin-bottom: 20px;">✨</div>
-      <h3 id="motivationQuote" style="font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--text);">"The secret of getting ahead is getting started."</h3>
-      <p id="motivationAuthor" style="color: var(--muted); margin-top: 10px; font-size: 15px;">— Mark Twain</p>
-      <button class="btn-add" style="margin-top: 30px;" onclick="getNewQuote()">Give me another!</button>
+
+    <div class="card" id="daily-quote" style="text-align:center; padding:70px 20px;">
+
+      <div style="font-size:40px; margin-bottom:20px;">
+        ✨
+      </div>
+
+      <h2 style="margin-bottom:15px;">
+        Daily Motivational Quote
+      </h2>
+
+      <p style="color:var(--muted); margin-bottom:25px;">
+        A little inspiration to make your day more productive.
+      </p>
+
+      <h3 id="motivationQuote"
+          style="font-size:24px; font-weight:700; line-height:1.5; color:var(--text);">
+        Loading your daily inspiration...
+      </h3>
+
+      <p id="motivationAuthor"
+         style="color:var(--muted); margin-top:15px; font-size:15px;">
+      </p>
+
+      <button class="btn-add"
+              id="changeQuoteBtn"
+              type="button"
+              style="margin-top:30px;">
+        ✨ Change Quote
+      </button>
+
     </div>
+
   </section>
 
-  <!-- 3. PREMIUM TIMER (With dynamic gradients) -->
+  <!-- 3. PREMIUM TIMER -->
   <section class="view" id="view-pomodoro">
+
     <div class="pomo-card-glass">
+
       <div class="pomo-modes">
         <button class="pomo-mode active" data-mode="focus" data-minutes="25">Focus</button>
         <button class="pomo-mode" data-mode="short_break" data-minutes="5">Short Break</button>
         <button class="pomo-mode" data-mode="long_break" data-minutes="15">Long Break</button>
       </div>
-      
+
       <div class="pomo-circle-wrap" id="pomoWrap">
+
         <svg class="pomo-svg" viewBox="0 0 240 240">
           <defs>
-            <!-- Gradient for ring -->
             <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop id="grad1" offset="0%" stop-color="#6366f1"/>
               <stop id="grad2" offset="100%" stop-color="#ec4899"/>
             </linearGradient>
           </defs>
-          <!-- Background track -->
+
           <circle class="pomo-track" cx="120" cy="120" r="104"/>
-          <!-- Animated progress -->
-          <circle class="pomo-progress" id="pomoProgress" cx="120" cy="120" r="104" stroke="url(#timerGrad)" stroke-width="8" fill="none" stroke-linecap="round" style="stroke-dasharray: 653.45; stroke-dashoffset: 0;"/>
+
+          <circle class="pomo-progress"
+                  id="pomoProgress"
+                  cx="120"
+                  cy="120"
+                  r="104"
+                  stroke="url(#timerGrad)"
+                  stroke-width="8"
+                  fill="none"
+                  stroke-linecap="round"
+                  style="stroke-dasharray:653.45; stroke-dashoffset:0;"/>
         </svg>
-        
+
         <div class="pomo-inner">
           <div class="pomo-time" id="pomoTime">25:00</div>
           <div class="pomo-label" id="pomoLabel">FOCUS TIME</div>
         </div>
+
       </div>
 
       <div class="pomo-controls">
+
         <button class="btn-pomo-main" id="pomoStart" title="Press Spacebar to Start/Pause">
-          <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+
+          <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" style="display:none;">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
         </button>
+
         <button class="btn-pomo-reset" id="pomoReset" title="Reset Timer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
         </button>
+
       </div>
 
-      <div id="pomoSessionsText" class="pomo-rounds">Round 1 of 4</div>
+      <div id="pomoSessionsText" class="pomo-rounds">
+        Round 1 of 4
+      </div>
+
     </div>
   </section>
 
@@ -181,6 +354,7 @@
     <div class="card">
       <h4 id="taskFormTitle">Add a New Task</h4>
       <form class="task-form" id="taskForm">
+
         <input id="taskTitle" type="text" placeholder="What to study?" required />
         <input id="taskSubject" type="text" placeholder="Subject" required />
         <input id="taskDate" type="date" required />
@@ -206,184 +380,453 @@
       </div>
       <div class="task-list" id="taskList"></div>
     </div>
+
   </section>
 
   <!-- 5. NOTES -->
   <section class="view" id="view-notes">
+
     <div class="card">
+
       <form class="notes-form" id="noteForm">
         <input id="noteTitle" type="text" placeholder="Title" required />
         <input id="noteSubject" type="text" placeholder="Subject" />
         <textarea id="noteContent" placeholder="Write note..."></textarea>
-        <div class="actions"><button class="btn-add" type="submit">Save Note</button></div>
+
+        <div class="actions">
+          <button class="btn-add" type="submit">Save Note</button>
+        </div>
       </form>
+
     </div>
-    <div class="card"><div class="notes-grid" id="notesGrid"></div></div>
+
+    <div class="card">
+      <div class="notes-grid" id="notesGrid"></div>
+    </div>
+
   </section>
 
   <!-- 6. PROFILE -->
   <section class="view" id="view-profile">
+
     <div class="profile-card">
+
       <div class="profile-cover"></div>
+
       <div class="profile-content">
+
         <div class="avatar large" id="profileAvatar">AK</div>
+
         <h3 id="profileName">Ali Khan</h3>
         <p id="profileCourse">Computer Science</p>
-        
+
         <div class="profile-info-grid">
+
           <div class="info-box">
             <span>Email Address</span>
             <strong id="profileEmail">ali@example.com</strong>
           </div>
+
           <div class="info-box">
             <span>Account Status</span>
-            <strong style="color: var(--green);">Active ✅</strong>
+            <strong style="color:var(--green);">Active ✅</strong>
           </div>
+
         </div>
 
-        <button class="btn-logout" onclick="logout()">Logout from this device</button>
+        <button class="btn-logout" onclick="logout()">
+          Logout from this device
+        </button>
+
       </div>
     </div>
+
   </section>
 
 </main>
 
 <!-- ================= MAIN APP LOGIC ================= -->
 <script>
-const user = JSON.parse(localStorage.getItem('currentUser'));
-if (!user) location.href = 'login.html';
 
-document.getElementById('welcomeHead').textContent = 'Welcome back, ' + user.name.split(' ')[0] + ' 👋';
-document.getElementById('profileAvatar').textContent = user.name.substring(0,2).toUpperCase();
-document.getElementById('profileName').textContent = user.name;
-document.getElementById('profileCourse').textContent = user.course;
-document.getElementById('profileEmail').textContent = user.email;
+const user = JSON.parse(localStorage.getItem('currentUser'));
+
+if (!user) {
+  location.href = 'login.html';
+} else {
+
+  document.getElementById('welcomeHead').textContent =
+    'Welcome back, ' + user.name.split(' ')[0] + ' 👋';
+
+  document.getElementById('profileAvatar').textContent =
+    user.name.substring(0,2).toUpperCase();
+
+  document.getElementById('profileName').textContent = user.name;
+  document.getElementById('profileCourse').textContent = user.course;
+  document.getElementById('profileEmail').textContent = user.email;
+
+}
+
+// ================= LOGOUT =================
 
 function logout() {
-  if(confirm('Are you sure you want to logout?')) {
+  if (confirm('Are you sure you want to logout?')) {
     localStorage.removeItem('currentUser');
     location.href = 'login.html';
   }
 }
 
+// ================= NAVIGATION =================
+
 document.querySelectorAll('.nav-item').forEach(btn => {
+
   btn.onclick = () => {
-    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+
+    document.querySelectorAll('.nav-item').forEach(b => {
+      b.classList.remove('active');
+    });
+
+    document.querySelectorAll('.view').forEach(v => {
+      v.classList.remove('active');
+    });
+
     btn.classList.add('active');
-    document.getElementById('view-' + btn.dataset.view).classList.add('active');
-    document.getElementById('topbarTitle').textContent = btn.dataset.title;
+
+    document.getElementById('view-' + btn.dataset.view)
+      .classList.add('active');
+
+    document.getElementById('topbarTitle').textContent =
+      btn.dataset.title;
+
     updateStats();
+
   };
+
 });
 
-const getTasks = () => JSON.parse(localStorage.getItem('tasks_' + user.email) || '[]');
-const saveTasks = (t) => localStorage.setItem('tasks_' + user.email, JSON.stringify(t));
-const getNotes = () => JSON.parse(localStorage.getItem('notes_' + user.email) || '[]');
-const saveNotes = (n) => localStorage.setItem('notes_' + user.email, JSON.stringify(n));
+// ================= LOCAL STORAGE =================
+
+const getTasks = () =>
+  JSON.parse(localStorage.getItem('tasks_' + user.email) || '[]');
+
+const saveTasks = (t) =>
+  localStorage.setItem('tasks_' + user.email, JSON.stringify(t));
+
+const getNotes = () =>
+  JSON.parse(localStorage.getItem('notes_' + user.email) || '[]');
+
+const saveNotes = (n) =>
+  localStorage.setItem('notes_' + user.email, JSON.stringify(n));
+
+// ================= UPDATE STATS =================
 
 function updateStats() {
+
   const tasks = getTasks();
+
   document.getElementById('statTotalTasks').textContent = tasks.length;
-  document.getElementById('statCompleted').textContent = tasks.filter(t => t.done).length;
-  document.getElementById('statNotes').textContent = getNotes().length;
-  const sessions = JSON.parse(localStorage.getItem('pomo_' + user.email) || '0');
+
+  document.getElementById('statCompleted').textContent =
+    tasks.filter(t => t.done).length;
+
+  document.getElementById('statNotes').textContent =
+    getNotes().length;
+
+  const sessions = JSON.parse(
+    localStorage.getItem('pomo_' + user.email) || '0'
+  );
+
   document.getElementById('statSessions').textContent = sessions;
+
 }
+
+// ================= DAILY MOTIVATIONAL QUOTE =================
 
 const quotes = [
-  { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
-  { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
-  { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-  { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-  { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" }
+
+  {
+    text: "The secret of getting ahead is getting started.",
+    author: "Mark Twain"
+  },
+
+  {
+    text: "It always seems impossible until it's done.",
+    author: "Nelson Mandela"
+  },
+
+  {
+    text: "Don't watch the clock; do what it does. Keep going.",
+    author: "Sam Levenson"
+  },
+
+  {
+    text: "Believe you can and you're halfway there.",
+    author: "Theodore Roosevelt"
+  },
+
+  {
+    text: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    author: "Winston Churchill"
+  },
+
+  {
+    text: "Education is the most powerful weapon which you can use to change the world.",
+    author: "Nelson Mandela"
+  },
+
+  {
+    text: "Learning never exhausts the mind.",
+    author: "Leonardo da Vinci"
+  },
+
+  {
+    text: "Discipline is the bridge between goals and accomplishment.",
+    author: "Jim Rohn"
+  },
+
+  {
+    text: "The future depends on what you do today.",
+    author: "Mahatma Gandhi"
+  },
+
+  {
+    text: "Great things are done by a series of small things brought together.",
+    author: "Vincent van Gogh"
+  },
+
+  {
+    text: "The expert in anything was once a beginner.",
+    author: "Helen Hayes"
+  },
+
+  {
+    text: "Don't let what you cannot do interfere with what you can do.",
+    author: "John Wooden"
+  },
+
+  {
+    text: "Success is the sum of small efforts repeated day in and day out.",
+    author: "Robert Collier"
+  },
+
+  {
+    text: "It does not matter how slowly you go as long as you do not stop.",
+    author: "Confucius"
+  },
+
+  {
+    text: "Dreams don't work unless you do.",
+    author: "John C. Maxwell"
+  },
+
+  {
+    text: "Start where you are. Use what you have. Do what you can.",
+    author: "Arthur Ashe"
+  },
+
+  {
+    text: "Quality is not an act, it is a habit.",
+    author: "Aristotle"
+  },
+
+  {
+    text: "Small progress is still progress.",
+    author: "Unknown"
+  },
+
+  {
+    text: "Productivity is never an accident. It is always the result of commitment.",
+    author: "Paul J. Meyer"
+  },
+
+  {
+    text: "Well done is better than well said.",
+    author: "Benjamin Franklin"
+  },
+
+  {
+    text: "You don't have to be great to start, but you have to start to be great.",
+    author: "Zig Ziglar"
+  },
+
+  {
+    text: "The more that you read, the more things you will know.",
+    author: "Dr. Seuss"
+  },
+
+  {
+    text: "A little progress each day adds up to big results.",
+    author: "Unknown"
+  },
+
+  {
+    text: "Great things never come from comfort zones.",
+    author: "Unknown"
+  }
+
 ];
 
+let currentQuoteIndex = -1;
+
 function getNewQuote() {
-  const q = quotes[Math.floor(Math.random() * quotes.length)];
-  document.getElementById('motivationQuote').innerText = `"${q.text}"`;
-  document.getElementById('motivationAuthor').innerText = `— ${q.author}`;
-  document.getElementById('dashQuote').innerText = `"${q.text}" — ${q.author}`;
+
+  const quoteElement = document.getElementById('motivationQuote');
+  const authorElement = document.getElementById('motivationAuthor');
+  const dashboardQuote = document.getElementById('dashQuote');
+
+  if (!quoteElement || !authorElement) return;
+
+  let newIndex;
+
+  // Avoid consecutive repeated quotes
+  do {
+    newIndex = Math.floor(Math.random() * quotes.length);
+  } while (
+    quotes.length > 1 &&
+    newIndex === currentQuoteIndex
+  );
+
+  currentQuoteIndex = newIndex;
+
+  const selectedQuote = quotes[currentQuoteIndex];
+
+  // Fade out
+  quoteElement.classList.add('quote-fade-out');
+  authorElement.classList.add('quote-fade-out');
+
+  if (dashboardQuote) {
+    dashboardQuote.style.opacity = '0';
+  }
+
+  setTimeout(() => {
+
+    quoteElement.textContent = `"${selectedQuote.text}"`;
+
+    authorElement.textContent = selectedQuote.author
+      ? `— ${selectedQuote.author}`
+      : '';
+
+    if (dashboardQuote) {
+      dashboardQuote.textContent =
+        `"${selectedQuote.text}" — ${selectedQuote.author}`;
+
+      dashboardQuote.style.opacity = '1';
+    }
+
+    // Fade in
+    quoteElement.classList.remove('quote-fade-out');
+    authorElement.classList.remove('quote-fade-out');
+
+    quoteElement.classList.add('quote-fade-in');
+    authorElement.classList.add('quote-fade-in');
+
+    setTimeout(() => {
+      quoteElement.classList.remove('quote-fade-in');
+      authorElement.classList.remove('quote-fade-in');
+    }, 500);
+
+  }, 300);
+
 }
+
+// Change Quote button
+document.getElementById('changeQuoteBtn')
+  .addEventListener('click', getNewQuote);
+
+// Random quote on every page refresh
 getNewQuote();
 
 // ================= CHECKLIST (Tasks) =================
 // Checklist code is in tasks.js
 
+window.deleteTask = (id) => {
+
+  if (!confirm('Delete this task?')) return;
+
+  saveTasks(getTasks().filter(t => t.id !== id));
+
+  renderTasks();
+  updateStats();
+
+};
+
+// ================= NOTES MANAGEMENT =================
+
 document.getElementById('noteForm').onsubmit = (e) => {
+
   e.preventDefault();
+
   const notes = getNotes();
+
   notes.unshift({
     id: Date.now(),
     title: document.getElementById('noteTitle').value,
     subject: document.getElementById('noteSubject').value || 'General',
     content: document.getElementById('noteContent').value
   });
+
   saveNotes(notes);
+
   document.getElementById('noteForm').reset();
-  renderNotes(); updateStats();
+
+  renderNotes();
+  updateStats();
+
 };
 
 function renderNotes() {
+
   const grid = document.getElementById('notesGrid');
   const notes = getNotes();
-  if (!notes.length) return grid.innerHTML = '<div class="empty">No notes yet.</div>';
-  
+
+  if (!notes.length) {
+    return grid.innerHTML =
+      '<div class="empty">No notes yet.</div>';
+  }
+
   grid.innerHTML = notes.map(n => `
     <div class="note-card">
+
       <div class="note-subject">${n.subject}</div>
+
       <div class="note-title">${n.title}</div>
+
       <div class="note-content">${n.content}</div>
-      <button class="t-del" style="margin-top:10px; width:100%" onclick="deleteNote(${n.id})">Delete</button>
-    </div>`).join('');
+
+      <button class="t-del"
+              style="margin-top:10px; width:100%"
+              onclick="deleteNote(${n.id})">
+        Delete
+      </button>
+
+    </div>
+  `).join('');
+
 }
 
 window.deleteNote = (id) => {
-  if(!confirm('Delete this note?')) return;
-  saveNotes(getNotes().filter(n => n.id !== id)); renderNotes(); updateStats();
+
+  if (!confirm('Delete this note?')) return;
+
+  saveNotes(getNotes().filter(n => n.id !== id));
+
+  renderNotes();
+  updateStats();
+
 };
 
-// ================= TIMER (Pomodoro) =================
-let pTime = 25*60, pTotal = 25*60, pRun = false, pInt, pMode = 'focus';
-const timeEl = document.getElementById('pomoTime');
-const startBtn = document.getElementById('pomoStart');
+// ================= INITIALIZE APP DATA =================
 
-function paintPomo() {
-  timeEl.textContent = `${String(Math.floor(pTime/60)).padStart(2,'0')}:${String(pTime%60).padStart(2,'0')}`;
+if (user) {
+  renderTasks();
+  renderNotes();
+  updateStats();
 }
 
-startBtn.onclick = () => {
-  if (pRun) { clearInterval(pInt); startBtn.textContent = 'Start'; pRun = false; return; }
-  pRun = true; startBtn.textContent = 'Pause';
-  pInt = setInterval(() => {
-    pTime--;
-    if (pTime <= 0) {
-      clearInterval(pInt); pRun = false; startBtn.textContent = 'Start';
-      alert('Session Complete! Take a break.');
-      let s = parseInt(localStorage.getItem('pomo_' + user.email) || '0');
-      if(pMode === 'focus') localStorage.setItem('pomo_' + user.email, s+1);
-      updateStats(); pTime = pTotal;
-    }
-    paintPomo();
-  }, 1000);
-};
-
-document.getElementById('pomoReset').onclick = () => {
-  clearInterval(pInt); pRun = false; startBtn.textContent = 'Start'; pTime = pTotal; paintPomo();
-};
-
-document.querySelectorAll('.pomo-mode').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('.pomo-mode').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active'); clearInterval(pInt); pRun = false; startBtn.textContent = 'Start';
-    pMode = btn.dataset.mode;
-    pTotal = parseInt(btn.dataset.minutes) * 60; pTime = pTotal; paintPomo();
-  };
-});
-
-// Initialize
-paintPomo(); renderNotes(); updateStats();
 </script>
+
+<!-- ================= TIMER JS FILE LINK ================= -->
+<script src="timer.js"></script>
+
 <script src="tasks.js"></script>
 </body>
 </html>

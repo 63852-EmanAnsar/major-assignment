@@ -3,9 +3,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   let timerInterval = null;
   let isRunning = false;
-  let timeLeft = 25 * 60; 
+  let timeLeft = 25 * 60;
   let totalTime = 25 * 60;
-  let currentMode = 'focus'; 
+  let currentMode = 'focus';
   let focusRounds = 0;
   let expectedTime = 0;
 
@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pomoWrap = document.getElementById('pomoWrap');
   const playIcon = document.getElementById('playIcon');
   const pauseIcon = document.getElementById('pauseIcon');
-  
+
   // Gradient IDs for changing colors dynamically
   const grad1 = document.getElementById('grad1');
   const grad2 = document.getElementById('grad2');
 
-  const circumference = 653.45; 
+  const circumference = 653.45;
 
   // --- Save State to LocalStorage ---
   function saveState() {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentMode = saved.currentMode;
       focusRounds = saved.focusRounds;
       totalTime = saved.totalTime;
-      
+
       if (saved.isRunning && saved.expectedTime) {
         const now = Date.now();
         const diff = Math.round((saved.expectedTime - now) / 1000);
@@ -126,11 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isRunning) {
       playIcon.style.display = 'none';
       pauseIcon.style.display = 'block';
-      if(pomoWrap) pomoWrap.classList.add('is-running');
+      if (pomoWrap) pomoWrap.classList.add('is-running');
     } else {
       playIcon.style.display = 'block';
       pauseIcon.style.display = 'none';
-      if(pomoWrap) pomoWrap.classList.remove('is-running');
+      if (pomoWrap) pomoWrap.classList.remove('is-running');
     }
   }
 
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timerInterval = setInterval(() => {
       const now = Date.now();
       const diff = Math.round((expectedTime - now) / 1000);
-      
+
       if (diff !== timeLeft) {
         timeLeft = diff;
         if (timeLeft < 0) timeLeft = 0;
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateButtonState();
         handleTimerComplete();
       }
-    }, 200); 
+    }, 200);
   }
 
   function startTimer() {
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleTimerComplete() {
     playBeep();
-    
+
     if (currentMode === 'focus') {
       focusRounds++;
       if (typeof user !== 'undefined' && user.email) {
@@ -205,11 +205,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mode === 'focus') totalTime = 25 * 60;
     else if (mode === 'short_break') totalTime = 5 * 60;
     else if (mode === 'long_break') totalTime = 15 * 60;
-    
+
     timeLeft = totalTime;
     isRunning = false;
     clearInterval(timerInterval);
-    
+
     updateColorScheme();
     updateButtonState();
     updateUI();
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (e) => {
     // Check if user is typing in an input field to avoid conflicts
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    
+
     if (e.code === 'Space') {
       e.preventDefault(); // Prevent page scrolling
       const timerView = document.getElementById('view-pomodoro');
@@ -252,4 +252,163 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize
   loadState();
+
+  // ================= DAILY MOTIVATIONAL QUOTE =================
+
+  const dailyQuoteText = document.getElementById('dailyQuoteText');
+  const dailyQuoteAuthor = document.getElementById('dailyQuoteAuthor');
+  const changeQuoteBtn = document.getElementById('changeQuoteBtn');
+
+  const motivationalQuotes = [
+    {
+      text: "The secret of getting ahead is getting started.",
+      author: "Mark Twain"
+    },
+    {
+      text: "It always seems impossible until it's done.",
+      author: "Nelson Mandela"
+    },
+    {
+      text: "Success is the sum of small efforts repeated day in and day out.",
+      author: "Robert Collier"
+    },
+    {
+      text: "The beautiful thing about learning is that nobody can take it away from you.",
+      author: "B.B. King"
+    },
+    {
+      text: "Education is the most powerful weapon which you can use to change the world.",
+      author: "Nelson Mandela"
+    },
+    {
+      text: "There are no shortcuts to any place worth going.",
+      author: "Beverly Sills"
+    },
+    {
+      text: "Great things are done by a series of small things brought together.",
+      author: "Vincent van Gogh"
+    },
+    {
+      text: "Believe you can and you're halfway there.",
+      author: "Theodore Roosevelt"
+    },
+    {
+      text: "The expert in anything was once a beginner.",
+      author: "Helen Hayes"
+    },
+    {
+      text: "Don't let what you cannot do interfere with what you can do.",
+      author: "John Wooden"
+    },
+    {
+      text: "Learning never exhausts the mind.",
+      author: "Leonardo da Vinci"
+    },
+    {
+      text: "Discipline is the bridge between goals and accomplishment.",
+      author: "Jim Rohn"
+    },
+    {
+      text: "Success doesn't come from what you do occasionally. It comes from what you do consistently.",
+      author: "Marie Forleo"
+    },
+    {
+      text: "The future depends on what you do today.",
+      author: "Mahatma Gandhi"
+    },
+    {
+      text: "Well done is better than well said.",
+      author: "Benjamin Franklin"
+    },
+    {
+      text: "You don't have to be great to start, but you have to start to be great.",
+      author: "Zig Ziglar"
+    },
+    {
+      text: "The more that you read, the more things you will know. The more that you learn, the more places you'll go.",
+      author: "Dr. Seuss"
+    },
+    {
+      text: "It does not matter how slowly you go as long as you do not stop.",
+      author: "Confucius"
+    },
+    {
+      text: "Quality is not an act, it is a habit.",
+      author: "Aristotle"
+    },
+    {
+      text: "Dreams don't work unless you do.",
+      author: "John C. Maxwell"
+    },
+    {
+      text: "Start where you are. Use what you have. Do what you can.",
+      author: "Arthur Ashe"
+    },
+    {
+      text: "Productivity is never an accident. It is always the result of commitment to excellence.",
+      author: "Paul J. Meyer"
+    },
+    {
+      text: "Small progress is still progress.",
+      author: "Unknown"
+    },
+    {
+      text: "Your only limit is your mind.",
+      author: "Unknown"
+    }
+  ];
+
+  let currentQuoteIndex = -1;
+
+  function displayRandomQuote() {
+    if (!dailyQuoteText || !dailyQuoteAuthor) return;
+
+    let newQuoteIndex;
+
+    do {
+      newQuoteIndex = Math.floor(Math.random() * motivationalQuotes.length);
+    } while (
+      motivationalQuotes.length > 1 &&
+      newQuoteIndex === currentQuoteIndex
+    );
+
+    currentQuoteIndex = newQuoteIndex;
+
+    // Fade out the existing quote
+    dailyQuoteText.classList.add('quote-fade-out');
+    dailyQuoteAuthor.classList.add('quote-fade-out');
+
+    setTimeout(() => {
+      const selectedQuote = motivationalQuotes[currentQuoteIndex];
+
+      dailyQuoteText.textContent = `"${selectedQuote.text}"`;
+      dailyQuoteAuthor.textContent = selectedQuote.author
+        ? `— ${selectedQuote.author}`
+        : '';
+
+      // Fade in the new quote
+      dailyQuoteText.classList.remove('quote-fade-out');
+      dailyQuoteAuthor.classList.remove('quote-fade-out');
+
+      dailyQuoteText.classList.add('quote-fade-in');
+      dailyQuoteAuthor.classList.add('quote-fade-in');
+
+      setTimeout(() => {
+        dailyQuoteText.classList.remove('quote-fade-in');
+        dailyQuoteAuthor.classList.remove('quote-fade-in');
+      }, 500);
+
+    }, 300);
+  }
+
+  // Display a random quote whenever the page loads or refreshes
+  displayRandomQuote();
+
+  // Change Quote button functionality
+  if (changeQuoteBtn) {
+    changeQuoteBtn.addEventListener('click', displayRandomQuote);
+  }
+
+  // ================= END DAILY MOTIVATIONAL QUOTE =================
+
 });
