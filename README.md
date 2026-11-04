@@ -17,8 +17,14 @@ Smart Study Planner is a simple web application that helps students organize and
 - Track the number of completed tasks
 
 ### Daily Motivational Quote
-- Displays a motivational quote
-- Users can change the quote to see a new one
+- Displays inspirational motivational quotes on the student's dashboard to encourage positive thinking, consistency, and productivity.
+- Includes multiple quotes related to studying, learning, discipline, hard work, consistency, and productivity.
+- Automatically displays a different random motivational quote whenever the page is refreshed.
+- Provides a **Change Quote** button that displays another random quote.
+- Displays the author's name along with the quote whenever available.
+- Includes smooth fade-out and fade-in transitions when changing quotes.
+- Uses purple-pink gradient styling that matches the StudyFlow website theme.
+- Features a responsive layout suitable for mobile, tablet, and desktop screens.
 
 ### Subject-wise Progress Tracker
 - Add subjects
@@ -57,7 +63,7 @@ No extra installation is needed.
 |--------|------|------------------|
 | Member 1 | Eman Ansar | Smart Studey Checkliat and Manager. |
 | Member 2 | Mahnoor Ahmer | Design and styling |
-| Member 3 | [Name] | [Responsibilities] |
+| Member 3 | [kashaf nawaz] | [DAILY MOTIVATIONAL QUOTE] |
 
 ## GitHub Collaboration
 
